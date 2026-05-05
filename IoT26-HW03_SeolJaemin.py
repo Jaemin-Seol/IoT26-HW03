@@ -5,6 +5,7 @@ from gpiozero import Button, MotionSensor
 from picamera import PiCamera
 from time import sleep
 from signal import pause
+import os.path
 
 # create objects
 button = Button(2) # GPIO 2 = pin 3
@@ -18,7 +19,7 @@ camera.start_preview()
 i = 0 # image name
 
 # function to stop camera and program
-def stop_cameara():
+def stop_camera():
     camera.stop_preview()
     exit()
 
@@ -26,12 +27,15 @@ def stop_cameara():
 def take_photo():
     global i
     i += 1
-    camera.capture(f'/home/pi/Desktop/image_{i}.jpg')
+    # set path
+    path = f'~/Desktop/image_{i}.jpg'
+    path = os.path.expanduser(path)
+    camera.capture(path)
     print("A photo has been taken")
     sleep(10)
 
 # assign functions to button and motion sensor
-button.when_pressed = stop_cameara
+button.when_pressed = stop_camera
 pir.when_motion = take_photo
 
 pause()

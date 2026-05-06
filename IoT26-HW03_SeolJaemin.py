@@ -2,37 +2,47 @@
 # 202234900 Seol Jaemin
 
 from gpiozero import Button, MotionSensor
-from picamera import PiCamera
+from picamera2 import Picamera2
+import libcamera
 from time import sleep
 from signal import pause
 import os.path
 
 # create objects
-button = Button(2) # GPIO 2 = pin 3
-pir = MotionSensor(4) # GPIO = pin 7
-camera = PiCamera()
+# I swapped these two pins for convenience
+button = Button(4) # GPIO 4 = pin 7
+pir = MotionSensor(2) # GPIO 2 = pin 3
+
+# Cam setup
+cam = Picamera2()
+config = cam.create_still_configuration()
+
+# Flip Camera
+config["transform"] = libcamera.Transform(vflip=1)
+cam.configure(config)
 
 # Start cam
-camera.rotation = 180 # Based on camera's physical orientation
-camera.start_preview()
+cam.start()
 
 i = 0 # image name
 
 # function to stop camera and program
 def stop_camera():
-    camera.stop_preview()
+    cam.stop()
+    print("Stopping...")
     exit()
 
 # function to take photo
 def take_photo():
     global i
     i += 1
+
     # set path
     path = f'~/Desktop/image_{i}.jpg'
     path = os.path.expanduser(path)
-    camera.capture(path)
+    cam.capture_file(path)
     print("A photo has been taken")
-    sleep(10)
+    sleep(5)
 
 # assign functions to button and motion sensor
 button.when_pressed = stop_camera

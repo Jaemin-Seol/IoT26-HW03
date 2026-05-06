@@ -18,7 +18,7 @@ cam = Picamera2()
 config = cam.create_still_configuration()
 
 # Flip Camera
-config["transform"] = libcamera.Transform(vflip=1)
+config["transform"] = libcamera.Transform(vflip=1, hflip=1)
 cam.configure(config)
 
 # Start cam and make folder

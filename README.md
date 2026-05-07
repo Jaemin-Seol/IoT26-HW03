@@ -10,3 +10,5 @@ core task.
 
 ### Videos
 [HW3_webm.webm](https://github.com/user-attachments/assets/be2c21ba-ccf9-470d-be84-8889b2888e9c)
+
+The demo video can be found in `results/HW3.mp4`.

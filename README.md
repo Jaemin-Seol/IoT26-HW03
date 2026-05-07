@@ -5,7 +5,18 @@ core task.
 
 
 ## Result
-result image place holder (video of gif of RPI taking photos when motion is detected)
 
+### Photos
+
+![HW3 setup or captured result (1)](results/HW3-1.jpg)
+
+### Demo video (muted by default; unmute in the player if needed)
+
+<video width="640" controls muted playsinline>
+  <source src="results/HW3.mp4" type="video/mp4">
+  Your browser does not support the video tag — use the MP4 link below.
+</video>
+
+[Download HW3.mp4](results/HW3.mp4)
 
 ## Screenshot of RPI IDE showing selected board & port

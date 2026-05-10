@@ -26,11 +26,11 @@ def take_photo():
     global i
     i += 1
 
-    file_path = f'/home/pi/Desktop/image_{i}.jpg'
+    file_path = f'/home/iot3_user/Desktop/image_{i}.jpg'
     camera.capture_file(file_path)
 
     print('A photo has been taken')
-
+    # waiting for no motion
     pir.wait_for_no_motion()
     sleep(5)
 

@@ -3,6 +3,7 @@ from gpiozero import Button, MotionSensor
 from picamera2 import Picamera2
 from time import sleep
 from signal import pause
+from pathlib import Path
 import sys
 
 # button assign gpio pin 2
@@ -18,6 +19,7 @@ picam2.configure(config)
 picam2.start()
 
 image_count = 0
+IMAGE_DIR = Path(__file__).resolve().parent / "images"
 
 def stop_program():
     print("stop camera")
@@ -29,8 +31,8 @@ def take_photo():
 
     image_count += 1
 
-    # numbered jpg path
-    filename = f"/home/iot3_user/Desktop/iot3/IoT26-HW03/images/image_{image_count}.jpg"
+    IMAGE_DIR.mkdir(parents=True, exist_ok=True)
+    filename = IMAGE_DIR / f"image_{image_count}.jpg"
     picam2.capture_file(str(filename))
 
     print("motion detected, take picture")
